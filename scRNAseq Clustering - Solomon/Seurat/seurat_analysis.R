@@ -4,6 +4,7 @@
 #devtools::install_github("VCCRI/CIDR")
 ## install CIDR from https://github.com/VCCRI/CIDR
 library(cidr)
+library(mclust)
 
 ## Read in data 
 ## Tag tables were downloaded from the data repository NCBI Gene Expression Omnibus (GSE67835)
@@ -44,3 +45,42 @@ plot(pca$x[,c(1,2)], col=cols, pch=1,
      xlab="PC1", ylab="PC2",
      main="Principal Component Analysis (prcomp)")
 
+
+#### Seurat ####
+################
+
+
+BiocManager::install("Seurat") 
+
+library(Seurat)
+library(dplyr)
+library(Matrix)
+# Load the PBMC dataset
+
+#pbmc.data <- read.csv("data_sc3_seurat/A_100.csv", row.names = 1);
+
+start_time <- Sys.time()
+
+# Examine the memory savings between regular and sparse matrices
+dense.size <- object.size(x = as.matrix(x = brainTags))
+sparse.size <- object.size(x = brainTags)
+
+mincell=0 # Keep all genes expressed in >= mincell cells (parameter)
+mingene=0 # Keep all cells with at least mingene detected genes (parameter)
+
+pbmc <- CreateSeuratObject(brainTags)
+pbmc <- NormalizeData(object = pbmc, normalization.method = "LogNormalize", scale.factor = 100)
+pbmc <- FindVariableFeatures(pbmc)
+pbmc[["percent.mt"]] <- PercentageFeatureSet(pbmc, pattern = "^mt-")
+pbmc <- ScaleData(pbmc, vars.to.regress = "percent.mt")
+pbmc <- RunPCA(pbmc, npcs = 100, ndims.print = 1:5, nfeatures.print = 5)
+j=1; # a tunable parameter
+pbmc <- FindNeighbors(pbmc, reduction = "pca", dims = 1:75, nn.eps = 0.5)
+results <- FindClusters(object = pbmc, resolution = j)
+
+end_time <- Sys.time()
+t_Seurat = end_time - start_time
+print(t_Seurat)
+
+ARI_Seurat <- adjustedRandIndex(results@active.ident,cols)
+ARI_Seurat
