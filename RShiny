@@ -1,0 +1,38 @@
+install.packages("shiny")
+
+library(shiny)
+
+initial_cluster <- readCSV('#input file')
+alternate_cluster <- readCSV('#input file')
+
+#need to find a way to combine the two files I think. Not sure yet.
+
+ui <- fluidPage(
+  titlePanel('Steered Research Project Group A'),
+    sidebarLayout(#explain what the inputs are
+      sidebarPanel(#place for the inputs)
+        valueBox(#for gene name selection)
+        #or
+       selectInput('var'.
+                    label = 'Choose a gene for more information'
+                    choices = c('gene one', 'gene two', 'gene three', 'ect'),
+                    selected = '')
+        
+    sliderInput('n',
+                label = 'Number of Clusters',
+                value = c() ,
+                min = ,
+                max = )
+    )),
+mainPanel(
+    plotOutput(outputID = 'plot')
+)
+
+server <- function(input, output) {
+  output$plot <- renderPlot({
+    x <- ('NAME')
+    y < - ('NAME')
+  })
+}
+
+shinyApp(ui = ui, server = server)
