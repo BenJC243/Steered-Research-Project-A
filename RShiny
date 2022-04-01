@@ -11,8 +11,10 @@ alternate_cluster <- readCSV('#input file')
 
 ui <- fluidPage(
   titlePanel('Steered Research Project Group A'),
-    sidebarLayout(#explain what the inputs are
-      sidebarPanel(#place for the inputs)
+    mainPanel('Cluster Graph',
+              p = 'The data below shows clustering of brain transcriptome data')
+    sidebarLayout(position = 'right'
+      sidebarPanel('Gene Selection')
         valueBox(#for gene name selection)
         #or
        selectInput('var'.
