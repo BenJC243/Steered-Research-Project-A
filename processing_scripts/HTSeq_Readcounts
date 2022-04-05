@@ -1,0 +1,30 @@
+  # ANACONDA INSTALLATION
+https://www.anaconda.com/products/distribution#linux
+
+  # Example read count 
+python -m HTSeq.scripts.count /scratch/spectre/b/bc234/STAR/STAR-2.7.10a/SRR1974543_STAR_Aligned.out.sam  /scratch/spectre/b/bc234/STAR/hg19_gtf/Homo_sapiens.GRCh37.75.gtf
+
+  # returns:
+ENSG00000000003	0
+ENSG00000000005	0
+ENSG00000000419	0
+ENSG00000000457	0
+ENSG00000000460	0
+ENSG00000000938	0
+ENSG00000000971	0
+ENSG00000001036	386
+ENSG00000001084	0
+ENSG00000001167	0
+ENSG00000001460	101
+ENSG00000001461	7
+ENSG00000001497	0
+ENSG00000001561	1901
+ENSG...
+...
+# returns all other counts up to ENSG00000273493
+
+__no_feature	3307320
+__ambiguous	18141
+__too_low_aQual	0
+__not_aligned	0
+__alignment_not_unique	155763
