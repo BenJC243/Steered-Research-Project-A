@@ -1,0 +1,38 @@
+  # STAR INSTALLATION
+https://github.com/alexdobin/STAR
+
+  # GENERATE GENOME INDEX
+#!/bin/bash
+#PBS -l nodes=2:ppn=4
+#PBS -l walltime=10:00:00
+#PBS -l vmem=140gb
+#PBS -m bea
+#PBS -M bc234@student.le.ac.uk
+
+/scratch/spectre/b/bc234/STAR/STAR-2.7.10a/source/./STAR --runMode genomeGenerate \
+--runThreadN 16 --genomeDir /scratch/spectre/b/bc234/STAR/STAR-2.7.10a/source/genome_index \ # directory of genome index output
+--genomeFastaFiles /scratch/spectre/b/bc234/old_STAR/hg19_ensembl/Homo_sapiens.GRCh37.75.dna.primary_assembly.fa \ #ref genome of reads to be aligned against
+--sjdbGTFfile /scratch/spectre/b/bc234/old_STAR/hg19_gtf/Homo_sapiens.GRCh37.75.gtf --sjdbOverhang 74 --genomeChrBinNbits 12 #genome annotation file
+
+  # ALIGNMENT --> SAM files for each pair of reads for each fastq
+ 
+#!/bin/bash
+#PBS -l nodes=2:ppn=4
+#PBS -l walltime=24:00:00
+#PBS -l vmem=140gb
+#PBS -m bea
+#PBS -M bc234@student.le.ac.uk
+
+for SRR1 in /scratch/spectre/b/bc234/sra/*_1.fastq; do #directory of _1.fastq files
+for SRR2 in /scratch/spectre/b/bc234/sra/fastq2/*_2.fastq; do #directory of _2.fastq files
+for i in $(cat /scratch/spectre/b/bc234/SRR_Acc_List.txt); do # SRR numbers in text file
+        /scratch/spectre/b/bc234/STAR/STAR-2.7.10a/source/./STAR --runThreadN 16 \
+        --genomeDir /scratch/spectre/b/bc234/STAR/STAR-2.7.10a/source/genome_index2/ \
+        --readFilesIn "$SRR1","$SRR2" \
+        --outFileNamePrefix /scratch/spectre/b/bc234/STAR/STAR-2.7.10a/source/out_STAR1/"$i"_STAR_ \ #return SAM (alignment) file per fastq-file pair
+        --outFilterType BySJout --outFilterMultimapNmax 20 \
+        --alignSJoverhangMin 8 --alignSJDBoverhangMin 1 --outFilterMismatchNmax 999 --outFilterMismatchNoverLmax 0.04 --alignIntronMin 20 \
+        --alignIntronMax 1000000 --alignMatesGapMax 1000000 --outSAMstrandField intronMotif
+done
+done
+done
