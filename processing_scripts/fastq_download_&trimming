@@ -1,0 +1,32 @@
+  # SRA TOOLKIT DOWNLOAD
+https://github.com/ncbi/sra-tools/wiki/02.-Installing-SRA-Toolkit
+
+  # FASTQ DOWNLOAD
+#!/bin/bash
+#PBS -l nodes=1:ppn=1
+#PBS -l walltime=10:00:00
+#PBS -l vmem=142gb
+#PBS -m bea
+#PBS -M bc234@student.le.ac.uk:
+
+for srr in $(cat /home/b/bc234/srr3.txt) #file containing SRR numbers
+do
+/home/b/bc234/Downloads/sra_toolkit2/sratoolkit.3.0.0-ubuntu64/bin/./fastq-dump $srr --split-files --outdir /scratch/spectre/b/bc234/sra
+done
+
+  # TRIMMING
+https://sourceforge.net/projects/prinseq/files/standalone/ #prinseq download --> prinseq-lite-0.20.4.tar.gz
+tar -xvzf prinseq-lite-0.20.4.tar.gz # extract prinseq
+
+  #trimming script:
+
+#!/bin/bash
+#PBS -l nodes=1:ppn=1
+#PBS -l walltime=24:00:00
+#PBS -l vmem=140gb
+#PBS -m bea
+#PBS -M bc234@student.le.ac.uk
+for file in /scratch/spectre/b/bc234/sra/*.fastq 
+do
+perl /scratch/spectre/b/bc234/prinseq_cp/prinseq-lite-0.20.4/prinseq-lite.pl -fastq $file -out_format 3 min_len 30 -trim_left 10 trim_qual_right 25 -lc_method entropy -lc_threshold 65
+done
