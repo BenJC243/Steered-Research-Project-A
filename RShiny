@@ -1,42 +1,45 @@
-###currently not usable but gives an idea of what I'm doing ### 
-
 install.packages("shiny")
 
 library(shiny)
 
-initial_cluster <- readCSV('#input file')
-alternate_cluster <- readCSV('#input file')
+initial_cluster <- readR(seurat_analysis.R)
+#alternate_cluster <- readCSV('#input file')
 
 #need to find a way to combine the two files I think. Not sure yet.
 
 ui <- fluidPage(
   titlePanel('Steered Research Project Group A'),
     mainPanel('Cluster Graph',
-              p = 'The data below shows clustering of brain transcriptome data')
-    sidebarLayout(position = 'right'
-      sidebarPanel('Gene Selection')
+              p = 'The data below shows clustering of brain transcriptome data'),
+    sidebarLayout(position = 'right'),
+      sidebarPanel('Gene Selection'),
         valueBox(#for gene name selection)
         #or
-       selectInput('var'.
-                    label = 'Choose a gene for more information'
-                    choices = c('gene one', 'gene two', 'gene three', 'ect'),
-                    selected = '')
+       selectInput('var',
+                    label = 'Choose a gene for more information',
+                    choices = c('SOX4', 'DCX', 'SOX11', 'BCL11A', 'SLA', 'SLC12A2', 'SLA1A3', 'SLC1A2', 'SPARCL1', 'ATP1B2', 'AQP4', 'PIP4K2A', 'CLDND1', 'TMEM144', 'PLP1', 'SRGN', 'A2M', 'LAPTM5', 'OLR1', 'CD83', 'SCG2', 'GABRA1', 'SYT1', 'ERBB4', 'SNAP25', 'NUSAP1', 'UBE2C', 'SMC4', 'CENPE', 'KPNA2', ' PLEK', 'HAVCR2', 'CD53', 'SPP1', 'LAPTM5', 'CALB2', 'CNTNAP2', 'ERBB4', 'BCL11A', 'SNAP25', ' POU3F2', 'SCG2', 'AASS', 'NUSAP1', 'B2M', 'TACC1', 'SPP1', 'OLR1', 'IFI27', 'B3GNT5', 'APOLD1', 'LAPTM5', 'IFITM1', 'PTPRF', 'PPP2R5A', 'RIMKLB', 'ZNF337', 'ZFY', ' TM9SF3', 'DUSP11', 'LONRF2', 'C1orf43', 'GABRA1', 'IFI27', 'TGM2', 'ABCG2', 'SLC2A1', 'SDPR', 'CRISPLD2', 'ACTA2', 'SYNPO2', 'IMPAD1', 'TAGLN', 'DCN', 'PRELP', 'PTN', 'MFAP4', 'SERPING1', 'IFI27', 'TGM2', 'DDX3Y', 'AKAP12', 'IMPAD1', 'CAV2', 'APOLD1', 'S1PR3', 'PRELP', 'PCOLCE', 'B3GNT2', 'MFAP4'),
+                    selected = ''),
+       
         
     sliderInput('n',
                 label = 'Number of Clusters',
-                value = c() ,
-                min = ,
-                max = )
-    )),
+                value = c(6) ,
+                min = 1,
+                max = 7)  #need to change this to represent number of clusters 
+    ))
+navlistPanel(
+  'Alignments',
+  tabPanel('Damaris et al'),
+  tabPanel('Alternative Analysis') #allows two different tabs for both data sets 
+)
 mainPanel(
-    plotOutput(outputID = 'plot')
+    plotOutput(outputID = 'clusterPlot')
 )
 
 server <- function(input, output) {
   output$plot <- renderPlot({
-    x <- ('NAME')
-    y < - ('NAME')
-  })
+    clusterPlot(input$num) #output depends on the input values   
+    })
 }
 
 shinyApp(ui = ui, server = server)
