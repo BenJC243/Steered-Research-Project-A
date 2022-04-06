@@ -16,7 +16,7 @@ https://www.gencodegenes.org/human/release_19.html #Annotation file --> 'Compreh
 
 /scratch/spectre/b/bc234/STAR/STAR-2.7.10a/source/./STAR --runMode genomeGenerate \
 --runThreadN 16 --genomeDir /scratch/spectre/b/bc234/STAR/STAR-2.7.10a/source/genome_index \# directory of genome index output
---genomeFastaFiles /scratch/spectre/b/bc234/old_STAR/hg19_ensembl/Homo_sapiens.GRCh37.75.dna.primary_assembly.fa \#ref genome of reads to be aligned against
+--genomeFastaFiles /scratch/spectre/b/bc234/old_STAR/hg19_ensembl/Homo_sapiens.GRCh37.75.dna.primary_assembly.fa \
 --sjdbGTFfile /scratch/spectre/b/bc234/old_STAR/hg19_gtf/Homo_sapiens.GRCh37.75.gtf --sjdbOverhang 74 --genomeChrBinNbits 12 #genome annotation file
 
   # ALIGNMENT --> SAM files for each pair of fastq files (each pair of reads)
