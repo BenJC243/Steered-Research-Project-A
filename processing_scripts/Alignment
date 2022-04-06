@@ -1,7 +1,12 @@
   # STAR INSTALLATION
 https://github.com/alexdobin/STAR
 
-  # GENERATE GENOME INDEX
+http://ftp.ensembl.org/pub/release-75/fasta/homo_sapiens/dna/ # Reference genome
+# (Homo_sapiens.GRCh37.75.dna.primary_assembly.fa.gz)
+
+https://www.gencodegenes.org/human/release_19.html #Annotation file --> 'Comprehensive gene annotation'
+
+# GENERATE GENOME INDEX
 #!/bin/bash
 #PBS -l nodes=2:ppn=4
 #PBS -l walltime=10:00:00
