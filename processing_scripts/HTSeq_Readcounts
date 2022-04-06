@@ -3,7 +3,7 @@ https://www.anaconda.com/products/distribution#linux
 
   # Example read count 
 python -m HTSeq.scripts.count /scratch/spectre/b/bc234/STAR/STAR-2.7.10a/SRR1974543_STAR_Aligned.out.sam  /scratch/spectre/b/bc234/STAR/hg19_gtf/Homo_sapiens.GRCh37.75.gtf \
-m- intersection -s no
+-m intersection -s no
 
   # returns:
 ENSG00000000003	0
