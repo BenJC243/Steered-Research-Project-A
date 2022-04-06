@@ -28,7 +28,7 @@ for i in $(cat /scratch/spectre/b/bc234/SRR_Acc_List.txt); do # SRR numbers in t
         /scratch/spectre/b/bc234/STAR/STAR-2.7.10a/source/./STAR --runThreadN 16 \
         --genomeDir /scratch/spectre/b/bc234/STAR/STAR-2.7.10a/source/genome_index2/ \
         --readFilesIn "$SRR1","$SRR2" \
-        --outFileNamePrefix /scratch/spectre/b/bc234/STAR/STAR-2.7.10a/source/out_STAR1/"$i"_STAR_ \ #return SAM (alignment) file per fastq-file pair
+        --outFileNamePrefix /scratch/spectre/b/bc234/STAR/STAR-2.7.10a/source/out_STAR1/"$i"_STAR_ \#return SAM (alignment) file per fastq-file pair
         --outFilterType BySJout --outFilterMultimapNmax 20 \
         --alignSJoverhangMin 8 --alignSJDBoverhangMin 1 --outFilterMismatchNmax 999 --outFilterMismatchNoverLmax 0.04 --alignIntronMin 20 \
         --alignIntronMax 1000000 --alignMatesGapMax 1000000 --outSAMstrandField intronMotif
