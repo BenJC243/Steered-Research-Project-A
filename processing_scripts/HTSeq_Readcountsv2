@@ -1,5 +1,0 @@
-  # Count Matrix
-for i in /scratch/spectre/b/bc234/STAR/STAR-2.7.10a/SAMS/*.sam; do
-        python -m HTSeq.scripts.count "$i" \
-        /scratch/spectre/b/bc234/old_STAR/hg19_gtf/Homo_sapiens.GRCh37.75.gtf -m intersection-nonempty -s no -c csv
-done
