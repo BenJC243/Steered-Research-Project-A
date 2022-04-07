@@ -4,4 +4,4 @@ https://www.anaconda.com/products/distribution#linux
   # Count Matrix
 python -m HTSeq.scripts.count \
 /scratch/spectre/b/bc234/STAR/STAR-2.7.10a/SAMS/*.sam \
-/scratch/spectre/b/bc234/STAR/STAR-2.7.10a/Homo_sapiens.GRCh37.75.gtf -m intersection-nonempty -s no -c csv
+/scratch/spectre/b/bc234/STAR/STAR-2.7.10a/hg19_gtf/Homo_sapiens.GRCh37.75.gtf -m intersection-nonempty -s no -c csv
