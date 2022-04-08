@@ -29,7 +29,7 @@ https://www.gencodegenes.org/human/release_19.html #Annotation file --> 'Compreh
 
 for SRR1 in /scratch/spectre/b/bc234/sra/*_1.fastq; do #directory of _1.fastq files
 for SRR2 in /scratch/spectre/b/bc234/sra/fastq2/*_2.fastq; do #directory of _2.fastq files
-for i in $(cat /scratch/spectre/b/bc234/SRR_Acc_List.txt); do # SRR numbers in text file --> download 'Accession List' in https://www.ncbi.nlm.nih.gov/Traces/study/?acc=PRJNA281204&o=acc_s%3Aa
+for i in $(cat /scratch/spectre/b/bc234/SRR_Acc_List.txt); do # SRR numbers in text file
         /scratch/spectre/b/bc234/STAR/STAR-2.7.10a/source/./STAR --runThreadN 16 \
         --genomeDir /scratch/spectre/b/bc234/STAR/STAR-2.7.10a/source/genome_index2/ \
         --readFilesIn "$SRR1","$SRR2" \
