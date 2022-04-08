@@ -9,7 +9,7 @@ https://github.com/ncbi/sra-tools/wiki/02.-Installing-SRA-Toolkit
 #PBS -m bea
 #PBS -M bc234@student.le.ac.uk:
 
-for srr in $(cat /home/b/bc234/srr3.txt) #file containing SRR numbers
+for srr in $(cat /home/b/bc234/srr.txt) #file containing SRR numbers --> 'Accession List' in www.ncbi.nlm.nih.gov/Traces/study/?acc=PRJNA281204&o=acc_s%3Aa
 do
 /home/b/bc234/Downloads/sra_toolkit2/sratoolkit.3.0.0-ubuntu64/bin/./fastq-dump $srr --split-files --outdir /scratch/spectre/b/bc234/sra
 done
