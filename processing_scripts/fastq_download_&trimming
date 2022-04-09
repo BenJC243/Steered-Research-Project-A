@@ -28,5 +28,5 @@ tar -xvzf prinseq-lite-0.20.4.tar.gz # extract prinseq
 #PBS -M bc234@student.le.ac.uk
 for file in /scratch/spectre/b/bc234/sra/*.fastq 
 do
-perl /scratch/spectre/b/bc234/prinseq_cp/prinseq-lite-0.20.4/prinseq-lite.pl -fastq $file -out_format 3 min_len 30 -trim_left 10 trim_qual_right 25 -lc_method entropy -lc_threshold 65
+perl /scratch/spectre/b/bc234/prinseq_cp/prinseq-lite-0.20.4/prinseq-lite.pl -fastq $file -out_format 3 min_len 30 -trim_left 10 -trim_qual_right 25 -lc_method entropy -lc_threshold 65
 done
