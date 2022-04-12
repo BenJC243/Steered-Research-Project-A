@@ -1,102 +1,97 @@
 install.packages("shiny")
 
 library(shiny)
+library(shiny)
+library(shinythemes)
 
-initial_cluster <- readR('seurat_analysis.R')
-#alternate_cluster <- readCSV('#input file')
+# Define UI for app that draws a histogram ----
+ui <- fluidPage(theme = shinytheme("cerulean"),
+                navbarPage("Steered Research Project Group A",
+                           tabPanel("About",
+                                    titlePanel("What we did"),
+                                    div(includeMarkdown("about.md"),
+                                        )),
+                           tabPanel("Damaris et al 2015 - Pipeline 1"
+                           ),
+                           
+                           
+                           tabPanel("Alternative Analysis - Pipeline 2- "),
+                           
+                           sidebarPanel('Gene Selection'),
+                           choices <- c('CD24', 'TMSB15A', 'NEUROD6', 'SOX11', 'DCX', 'S100A11', 'SRGN', 'B2M', 'ARHGDIB', 'GABRA1', 'GABRG2', 'SNAP25', 'TMEM130', 'SYNPR', 'CKMT1B', 'MEG3', 'UNC80', 'AHI1', 'EEF1A1', 'ACSBG1', 'SLC39A12', 'AGXT2L1', 'GJB6', 'PRODH', 'MAG', 'KLK6', '9JB1', 'CNDP1', 'CARN1'),
+                           selectInput('var', 'Choose a gene for more information', choices), 
+                           for (gene in choices) {
+                             if(choice = CD24) 
+                               print('gene information here') #repeat this multiple times for every gene
+                             if(choice = TMSB15A ) 
+                               print('gene information here')
+                             if(choice = NEUROD6) 
+                               print('gene information here')
+                             if(choice = SOX11 ) 
+                               print('gene information here')
+                             if(choice = DCX) 
+                               print('gene information here')
+                             if(choice = S100A11) 
+                               print('gene information here')
+                             if(choice = SRGN) 
+                               print('gene information here')
+                             if(choice = B2M) 
+                               print('gene information here')
+                             if(choice = CD74) 
+                               print('gene information here')
+                             if(choice = ARHGDIB) 
+                               print('gene information here')
+                             if(choice = GABRA1) 
+                               print('gene information here')
+                             if(choice = GABRG2) 
+                               print('gene information here')
+                             if(choice = SNAP25) 
+                               print('gene information here')
+                             if(choice = TMEM130)
+                               print('gene information here')
+                             if(choice = SYNPR) 
+                               print('gene information here')
+                             if(choice = CKMT1B) 
+                               print('gene information here')
+                             if(choice = MEG3) 
+                               print('gene information here')
+                             if(choice = UNC80) 
+                               print('gene information here')
+                             if(choice = AHI1)
+                               print('gene information here')
+                             if(choice = EEF1A1) 
+                               print('gene information here')
+                             if(choice = ACSBG1) 
+                               print('gene information here')
+                             if(choice = SLC39A12) 
+                               print('gene information here')
+                             if(choice = AGXT2L1) 
+                               print('gene information here')
+                             if(choice = GJB6) 
+                               print('gene information here')
+                             if(choice = PRODH) 
+                               print('gene information here')
+                             if(choice = MAG)
+                               print('gene information here')
+                             if(choice = KLK6) 
+                               print('gene information here')
+                             if(choice = GJB1) 
+                               print('gene information here')
+                             if(choice = CNDP1) 
+                               print('gene information here')
+                             if(choice = CARNS1) 
+                               print('gene information here')}
 
-#need to find a way to combine the two files I think. Not sure yet.
-
-ui <- navlistPanel(
-  'Alignments',
-  tabPanel('Damaris et al'),
-   selectInput('dataset', label = 'Dataset', choices = ls('seurat_analysis')),
-  tabPanel('Alternative Analysis'), #allows two different tabs for both data sets 
-   selectInput('dataset', label = 'Dataset', choices = ls('alternative analysis')),
-  fluidPage(
-  titlePanel('Steered Research Project Group A'),
-    mainPanel('Cluster Graph',
-              p = 'The data below shows clustering of brain transcriptome data'),
-    sidebarLayout(position = 'right'),
-    sliderInput('n',
-                label = 'Number of Clusters',
-                value = 11,
-                min = 1,
-                max = 15),  
-  sidebarPanel('Gene Selection'),
-  choices = c('CD24', 'TMSB15A', 'NEUROD6', 'SOX11', 'DCX', 'S100A11', 'SRGN', 'B2M', 'ARHGDIB', 'GABRA1', 'GABRG2', 'SNAP25', 'TMEM130', 'SYNPR', 'CKMT1B', 'MEG3', 'UNC80', 'AHI1', 'EEF1A1', 'ACSBG1', 'SLC39A12', 'AGXT2L1', 'GJB6', 'PRODH', 'MAG', 'KLK6', '9JB1', 'CNDP1', 'CARN1'), ))
-    selectInput('var', 'Choose a gene for more information', choices) #think i need to use a for loop here with info on gene to be displayed
-      for (gene in choices) {
-        if(choice = CD24) 
-          print('gene information here') #repeat this multiple times for every gene
-        if(choice = TMSB15A ) 
-          print('gene information here')
-        if(choice = NEUROD6) 
-          print('gene information here')
-        if(choice = SOX11 ) 
-          print('gene information here')
-        if(choice = DCX) 
-          print('gene information here')
-        if(choice = S100A11) 
-          print('gene information here')
-        if(choice = SRGN) 
-          print('gene information here')
-        if(choice = B2M) 
-          print('gene information here')
-        if(choice = CD74) 
-          print('gene information here')
-        if(choice = ARHGDIB) 
-          print('gene information here')
-        if(choice = GABRA1) 
-          print('gene information here')
-        if(choice = GABRG2) 
-          print('gene information here')
-        if(choice = SNAP25) 
-          print('gene information here')
-        if(choice = TMEM130)
-          print('gene information here')
-        if(choice = SYNPR) 
-          print('gene information here')
-        if(choice = CKMT1B) 
-          print('gene information here')
-        if(choice = MEG3) 
-          print('gene information here')
-        if(choice = UNC80) 
-          print('gene information here')
-        if(choice = AHI1)
-          print('gene information here')
-        if(choice = EEF1A1) 
-          print('gene information here')
-        if(choice = ACSBG1) 
-          print('gene information here')
-        if(choice = SLC39A12) 
-          print('gene information here')
-        if(choice = AGXT2L1) 
-          print('gene information here')
-        if(choice = GJB6) 
-          print('gene information here')
-        if(choice = PRODH) 
-          print('gene information here')
-        if(choice = MAG)
-          print('gene information here')
-        if(choice = KLK6) 
-          print('gene information here')
-        if(choice = GJB1) 
-          print('gene information here')
-        if(choice = CNDP1) 
-          print('gene information here')
-        if(choice = CARNS1) 
-          print('gene information here')
-      }
-
-mainPanel(
-    plotOutput(outputID = 'clusterPlot')
+                )
 )
+        
 
-server <- function(input, output) {
-  output$plot <- renderPlot({
-    clusterPlot(input$num) #output depends on the input values   
-    })
-}
+# Define server logic required to draw a histogram ----
+server <- function(input, output, session) {
+  
+  output$txtout <- renderText({
+    paste( input$txt1, input$txt2, sep = " " )
+  })
+} # server
 
-shinyApp(ui = ui, server = server)
+shinyApp(ui, server)
