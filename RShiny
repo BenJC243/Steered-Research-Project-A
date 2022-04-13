@@ -1,10 +1,6 @@
-install.packages("shiny")
-
-library(shiny)
 library(shiny)
 library(shinythemes)
-
-# Define UI for app that draws a histogram ----
+#source('seurat_analysis.R', local = TRUE) # this line should allow us to access the data for the graphs.
 ui <- fluidPage(theme = shinytheme("cerulean"),
                 navbarPage("Steered Research Project Group A",
                            tabPanel("About",
@@ -15,83 +11,46 @@ ui <- fluidPage(theme = shinytheme("cerulean"),
                            ),
                            
                            
-                           tabPanel("Alternative Analysis - Pipeline 2- "),
+                           tabPanel("Alternative Analysis - Pipeline 2- ",
+                                    sidebarPanel("Gene Selection", 
+                                          selectInput('var', 'Choose a gene for more information',
+                                                      choices = c('CD24'= " CD24 is a signal transducer that is belived to play a role in cell differentiation. It also promotes AG-dependent proliferation of B cells and prevents the terminal differentiation into antibody forming cells ", 'TMSB15A'= "is involved in cytoskeleton organisation via binding to actin monomors and inhibiting actin polymerisation", 'NEUROD6'= "This is gene NEUROD6", 'SOX11'= " SOX11 is a transcriptional activator of TEAD2, binds to gene promoters with POU3F2/BRN2 or PIU3F1/OCT6 and plays a role in cell survival in developing tiiue. More specifically in tissues such as the neural tube, branchial arches and somites",
+                                                                   'DCX'= "DCX is a microtubule-associated protein invovled in neuronal dispersion and cortex lamination during cerebral cortex development. May also be involved in the promotion of neuronal migration", 'S100A11' ="Allows for the differentiation and cornification of keratinocytes", 'SRGN' = "Involved in the formation of mast cell secretory granule. Necessary for storage of some proteases in connective tissue and mucosal mast cells, and for storage of granzyme B in T-lymphocytes. Also involved in the localisation of neutrophil elastase in azurophil granules of neutrophils. Mediates processing of MMP2. Involved in cytotoxic cell granule-mediated apoptosis.", 'BZM' = "This is gene B2M", 'ARHGDIB'  = "This is gene ARHGDIB", 
+                                                                  'GABRA1'  = "This is gene GABRA1", 'GABRG2'  = "This is gene GABRG2", 'SNAP25' = "This is gene SNAP25", 'TMEM130' = "This is gene TMEM130", 
+                                                                  'SYNPR' = "This is gene SYNPR", 'CKMT1B' = "This is gene CKMT1B", 'MEG3' = "This is gene MEG3", 'UNC80' = "This is gene UNC80", 'AHI1' = "This is gene AHI1", 
+                                                                  'EEF1A1' = "This is gene EEF1A1", 'ACSBG1' = "This is gene ACSBG1", 'SLC39A12' = "This is gene SLC39A12", 'AGXT2L1' = "This is gene AGXT2L1", 'GJB6' = "This is gene GJB6",
+                                                                  'PRODH' = "This is gene PRODH", 'MAG' = "This is gene MAG", 'KLK6' = "This is gene KLK6", '9JB1' = "This is gene 9JB1", 'CNDP1' = "This is gene CNDP1", 'CARN1' = "This is gene CARN1"),
+                                                      selected = "", multiple = FALSE), 
+                                          radioButtons("CD24", "Select a specific gene", list("Test1", "Test2"), "")#Gene CD24 - from cluster 1" ))
+                                    
+                                    ),
+                                    mainPanel(
+                                      #tags$label(h3('Status/Output')), # Status/Output Text Box
+                                      verbatimTextOutput('contents'),
+                                      tableOutput('tabledata'), # Prediction results table)
+                                      textOutput("firstgene"),
+                                      textOutput("dropdown")
+                                      
+                                    )
+
+                              )
                            
-                           sidebarPanel('Gene Selection'),
-                           choices <- c('CD24', 'TMSB15A', 'NEUROD6', 'SOX11', 'DCX', 'S100A11', 'SRGN', 'B2M', 'ARHGDIB', 'GABRA1', 'GABRG2', 'SNAP25', 'TMEM130', 'SYNPR', 'CKMT1B', 'MEG3', 'UNC80', 'AHI1', 'EEF1A1', 'ACSBG1', 'SLC39A12', 'AGXT2L1', 'GJB6', 'PRODH', 'MAG', 'KLK6', '9JB1', 'CNDP1', 'CARN1'),
-                           selectInput('var', 'Choose a gene for more information', choices), 
-                           for (gene in choices) {
-                             if(choice = CD24) 
-                               print('gene information here') #repeat this multiple times for every gene
-                             if(choice = TMSB15A ) 
-                               print('gene information here')
-                             if(choice = NEUROD6) 
-                               print('gene information here')
-                             if(choice = SOX11 ) 
-                               print('gene information here')
-                             if(choice = DCX) 
-                               print('gene information here')
-                             if(choice = S100A11) 
-                               print('gene information here')
-                             if(choice = SRGN) 
-                               print('gene information here')
-                             if(choice = B2M) 
-                               print('gene information here')
-                             if(choice = CD74) 
-                               print('gene information here')
-                             if(choice = ARHGDIB) 
-                               print('gene information here')
-                             if(choice = GABRA1) 
-                               print('gene information here')
-                             if(choice = GABRG2) 
-                               print('gene information here')
-                             if(choice = SNAP25) 
-                               print('gene information here')
-                             if(choice = TMEM130)
-                               print('gene information here')
-                             if(choice = SYNPR) 
-                               print('gene information here')
-                             if(choice = CKMT1B) 
-                               print('gene information here')
-                             if(choice = MEG3) 
-                               print('gene information here')
-                             if(choice = UNC80) 
-                               print('gene information here')
-                             if(choice = AHI1)
-                               print('gene information here')
-                             if(choice = EEF1A1) 
-                               print('gene information here')
-                             if(choice = ACSBG1) 
-                               print('gene information here')
-                             if(choice = SLC39A12) 
-                               print('gene information here')
-                             if(choice = AGXT2L1) 
-                               print('gene information here')
-                             if(choice = GJB6) 
-                               print('gene information here')
-                             if(choice = PRODH) 
-                               print('gene information here')
-                             if(choice = MAG)
-                               print('gene information here')
-                             if(choice = KLK6) 
-                               print('gene information here')
-                             if(choice = GJB1) 
-                               print('gene information here')
-                             if(choice = CNDP1) 
-                               print('gene information here')
-                             if(choice = CARNS1) 
-                               print('gene information here')}
 
-                )
-)
-        
+                ))
+#)
+#)
 
-# Define server logic required to draw a histogram ----
+
+
 server <- function(input, output, session) {
-  
-  output$txtout <- renderText({
-    paste( input$txt1, input$txt2, sep = " " )
-  })
-} # server
+
+    output$firstgene <- renderText(input$var)
+    output$dropdown <- renderText(input$CD24)
+    
+    output$txtout <- renderText({
+      paste( input$txt1, input$txt2, sep = " " )
+    })
+  } # server
+
 
 shinyApp(ui, server)
