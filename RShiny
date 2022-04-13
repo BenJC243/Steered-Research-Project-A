@@ -1,6 +1,6 @@
 library(shiny)
 library(shinythemes)
-#source('seurat_analysis.R', local = TRUE) # this line should allow us to access the data for the graphs.
+#source('seurat_analysis.R', local = TRUE) # this line should allow us to access the data for the graphs. but it doesnt
 ui <- fluidPage(theme = shinytheme("cerulean"),
                 navbarPage("Steered Research Project Group A",
                            tabPanel("About",
