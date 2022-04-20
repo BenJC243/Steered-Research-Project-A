@@ -6,6 +6,19 @@ library(shinythemes)
 #original <- read.csv('test.csv')
 #alternative <- read_R('alternative_analysis.R')
 ui <- fluidPage(theme = shinytheme("cerulean"),
+                sidebarLayout(
+                  sidebarPanel(
+                    fileInput(
+                      inputId = "files", 
+                      label = "Choose CSV File", 
+                      multiple = TRUE,
+                      accept = c("text/csv",
+                                 "text/comma-separated-values,text/plain",
+                                 ".csv")
+                    )
+                  ),
+                  mainPanel(
+                    tableOutput("contents"),
                 navbarPage("Steered Research Project Group A",
                            tabPanel("About",
                                     titlePanel("What we did"),
@@ -34,7 +47,7 @@ ui <- fluidPage(theme = shinytheme("cerulean"),
                                                                   'EEF1A1' = "Promotes GTP-dependent binding of aminoacyl-tRNA to ribsosomes. Also plays a role in regulaiton of IFNG transcription. ", 'ACSBG1' = "Ligase that catalyses the converstion of fatty acids into acyl-CoAs. Present in all regions of the brain excluding the pituitary gland", 'SLC39A12' = "Zinc influx transporter protein expressed in the brain", 'AGXT2L1' = "Enzyme that catalyses the pyridoxal-phosphate-dependent brakdown of phosphoethanolamine", 'GJB6' = "Encodes for a gap junction.",
                                                                   'PRODH' = "Causes the conversion of proline to delta-1-pyrroline-5-carboxylate.", 'MAG' = "Mediates interaction between myleinating cells and neurons by binding to neuronal sialic acid-containing gangliosides. Plays a role in axon myelinaiton maintenance.", 'KLK6' = "Is a serine protease which shows activity against multiple proteins including: amyloid precursor protein, myelin basic protein, gelatin, casein, fibronectin, laminin, vitronectin and collagen. It is also thought to play a potential role in axon outgrowth after spinal cord injury.", 'CNDP1' = "Enzyme which catalyses peptide bond hydrolysis in Xaa-His dipeptides. Found in the adult central nervous system.", 'CARNS1' = "Enzymes that catalyses the synthesis of carnosine and homocarnosine.", 'VSTM2A' = "Plays a role in the regulation of the early stage of white and brown preadipocyte cell differentiation.", 'NLGN4Y' = " Neuronal cell surface protein invovled in cell-cell interactions", 'DLX6' = " Has roles including DNA-binding transcription factor activity, and sequence specific DNA binding. DLX6 is expressed at day 9 of embryonic development, with expression on day 12.5 being in the brain and bones. From this, expression levels decline from day 15. Primarily ecpressed in the forebrain."),
                                                       selected = "", multiple = FALSE), 
-                                          radioButtons("CD24", "Select a specific gene", list("Test1", "Test2"), "")#Gene CD24 - from cluster 1" ))
+                                         # radioButtons("CD24", "Select a specific gene", list("Test1", "Test2"), "")#Gene CD24 - from cluster 1" ))
                                     
                                     ),
                                     mainPanel(
@@ -50,8 +63,8 @@ ui <- fluidPage(theme = shinytheme("cerulean"),
                            
 
                 ))
-#)
-#)
+)
+)
 
 
 
@@ -65,9 +78,17 @@ server <- function(input, output, session) {
     output$scatterplot <- renderPlot({
     ggplot(data=(read.csv("file_name_here")),
                 aes_string(x = input$x, y = input$y))
-    })
-    })
-  } # server
-
-
-shinyApp(ui, server)
+      server <- function(input, output) {
+        output$contents <- renderTable({
+          req(input$files)
+          upload = list()
+          
+          for(nr in 1:length(input$files[, 1])){
+            upload[[nr]] <- read.csv(
+              file = input$files[[nr, 'datapath']]
+            )
+          }
+          
+          return(upload)
+        })
+      }
