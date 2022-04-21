@@ -25,9 +25,8 @@ for i in /home/bc234/zip_test/csvs/*.csv; do
 done
 
 # append cut matrices to 1st sample containing its gene names (SRR1974543)
-for i in /home/bc234/zip_test/csvs/*cut*; do
-        paste /home/bc234/zip_test/csvs/4543/SRR1974543.csv $i > new.csv
-done
+paste /home/bc234/zip_test/csvs/4543/SRR1974543.csv \
+/home/bc234/zip_test/csvs/*cut >> new.csv
 
 # remove 1st col (Ensembl gene IDs), leaving csv file w/ gene names in 1st col, read counts of each sample in remaining cols:
 cut -f2- new.csv > new_final.csv
