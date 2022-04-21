@@ -1,7 +1,33 @@
   # ANACONDA INSTALLATION
 https://www.anaconda.com/products/distribution#linux
 
-  # Count Matrix
+# HTSeq installation
+conda install htseq
+
+# note: may have to generate new environment variable before installing HTSeq, see:
+https://medium.com/floppy-disk-f/linux-ubuntu-how-to-fix-solving-environment-failed-with-initial-frozen-solve-27c53c6de32a
+
+  # Count Matrix --> appends each SAM file's counts into same csv file, but eventually gets killed...
 python -m HTSeq.scripts.count \
 /scratch/spectre/b/bc234/STAR/STAR-2.7.10a/SAMS/*.sam \
 /scratch/spectre/b/bc234/STAR/STAR-2.7.10a/hg19_gtf/Homo_sapiens.GRCh37.75.gtf --additional-attr=gene_name -m intersection-nonempty -s no -c csv
+
+
+# Count matrix v2 --> generate one count matrix per SAM file:
+for i in /scratch/spectre/b/bc234/STAR/STAR-2.7.10a/SAMS/*.sam; do
+        python -m HTSeq.scripts.count $i /scratch/spectre/b/bc234/STAR/STAR-2.7.10a/hg19_gtf/Homo_sapiens.GRCh37.75.gtf --additional-attr=gene_name -m intersection-nonempty -s no > "$i"COUNTS.csv
+done
+
+  # Merge files:
+# generate new files of first 3 cols cut from each matrix (leaving only their counts as 1 col)
+for i in /home/bc234/zip_test/csvs/*.csv; do
+        cut -f3- $i > "$i"cut
+done
+
+# append cut matrices to 1st sample containing its gene names (SRR1974543)
+for i in /home/bc234/zip_test/csvs/*cut*; do
+        paste /home/bc234/zip_test/csvs/4543/SRR1974543.csv $i > new.csv
+done
+
+# remove 1st col (Ensembl gene IDs), leaving csv file w/ gene names in 1st col, read counts of each sample in remaining cols:
+cut -f2- new.csv > new_final.csv
