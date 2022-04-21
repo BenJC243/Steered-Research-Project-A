@@ -30,7 +30,7 @@ ui <- fluidPage(theme = shinytheme("cerulean"),
                                                   label = 'Number of Clusters',
                                                   min = 1,
                                                   max = 15,
-                                                  value = 11),
+                                                  value = 11), #number of clusters the user can use - opens on 11 as this is the optimum for this data
                                       mainPanel(
                                         plotOutput(outputId = "scatterplot")
                                       )
@@ -73,12 +73,21 @@ server <- function(input, output, session) {
     output$firstgene <- renderText(input$var)
     output$dropdown <- renderText(input$CD24)
     
+    x    <- reanalysis
+    bins <- seq(min(x), max(x), length.out = input$bins + 1)
+    
+    hist(x, breaks = bins, col = "#75AADB", border = "white",
+         xlab = "Waiting time to next eruption (in mins)",
+         main = "Histogram of waiting times")
+    
+}
+
+
     output$txtout <- renderText({
       paste( input$txt1, input$txt2, sep = " " )
     output$scatterplot <- renderPlot({
     ggplot(data=(read.csv("file_name_here")),
                 aes_string(x = input$x, y = input$y))
-      server <- function(input, output) {
         output$contents <- renderTable({
           req(input$files)
           upload = list()
@@ -88,7 +97,3 @@ server <- function(input, output, session) {
               file = input$files[[nr, 'datapath']]
             )
           }
-          
-          return(upload)
-        })
-      }
