@@ -18,7 +18,7 @@ for file in os.listdir(dir):
                 sum = str(sum) 
             return sum
         
-        # each count normalised (CPM) in count matrix
+        # make new file of counts normalised (CPM)
         c = open('/home/bc234/test_dir/file_' + str(count) + 'NORM.txt', 'w')
         for i in rl:
             if i == '0':
