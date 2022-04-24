@@ -1,15 +1,16 @@
 import os
 import math
 
+# iterate over files in dir containing count matrices
 dir = '/home/bc234/test_dir'
 count = 0
 for file in os.listdir(dir):
-    if file.endswith('.txt'):
+    if file.endswith('.csv'):
         count = count + 1
         fo = open(os.path.join(dir, file))
         rl = fo.read().splitlines()
         
-        # sum of col
+        # sum of cols in each count matrix file
         def col_sum():
             sum = 0
             for val in rl:
@@ -17,7 +18,7 @@ for file in os.listdir(dir):
                 sum = str(sum) 
             return sum
         
-        # each count normalised (CPM)
+        # each count normalised (CPM) in count matrix
         c = open('/home/bc234/test_dir/file_' + str(count) + 'NORM.txt', 'w')
         for i in rl:
             if i == '0':
