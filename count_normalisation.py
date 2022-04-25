@@ -26,5 +26,5 @@ for file in os.listdir(dir):
             s = float(i) / float(col_sum())
             s = s * 1000000
             d = math.log(s, 10)
-            e = str(s) + '\n'
+            e = str(d) + '\n'
             c.write(e)
