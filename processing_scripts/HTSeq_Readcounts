@@ -7,12 +7,6 @@ conda install htseq
 # note: may have to generate new environment variable before installing HTSeq, see:
 https://medium.com/floppy-disk-f/linux-ubuntu-how-to-fix-solving-environment-failed-with-initial-frozen-solve-27c53c6de32a
 
-  # Count Matrix --> appends each SAM file's counts into same csv file, but eventually gets killed...
-python -m HTSeq.scripts.count \
-/scratch/spectre/b/bc234/STAR/STAR-2.7.10a/SAMS/*.sam \
-/scratch/spectre/b/bc234/STAR/STAR-2.7.10a/hg19_gtf/Homo_sapiens.GRCh37.75.gtf --additional-attr=gene_name -m intersection-nonempty -s no -c csv
-
-
 # Count matrix v2 --> generate one count matrix per SAM file:
 for i in /scratch/spectre/b/bc234/STAR/STAR-2.7.10a/SAMS/*.sam; do
         python -m HTSeq.scripts.count $i /scratch/spectre/b/bc234/STAR/STAR-2.7.10a/hg19_gtf/Homo_sapiens.GRCh37.75.gtf --additional-attr=gene_name -m intersection-nonempty -s no > "$i"COUNTS.csv
