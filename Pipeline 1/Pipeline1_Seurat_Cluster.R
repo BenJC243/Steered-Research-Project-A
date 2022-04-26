@@ -97,5 +97,8 @@ cluster1.markers <- FindMarkers(pbmc, ident.1 = 1, min.pct = 0.25)
 head(cluster1.markers, n = 5)
 
 
+reanalysis <- data.frame(cluster1.markers)
+write.table(reanalysis, "reanalysis.csv", sep = ',', rownames = TRUE)
+
 
 
