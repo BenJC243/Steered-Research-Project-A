@@ -1,0 +1,20 @@
+  # generate new files of first 2 cols cut from each matrix (leaving only their counts as 1 col)
+for i in /home/bc234/csvs/*.csv; do
+        cut -f3- $i > "$i"CUT
+done
+
+  # run count_normalisation.py in dir containing files containing counts only (python3)
+python3 count_normalisation.py
+
+  # output a file containing gene names only by removing last column 
+awk 'NF{NF-=1};1' SRR1974543.csvCUT > genes.csv
+
+  # append normalised count matrices to genes.csv
+paste /home/bc234/zip_test/csvs/4543/SRR1974543.csv \
+/home/bc234/zip_test/csvs/*NORM* >> new.csv
+
+  # remove 1st col (Ensembl gene IDs), leaving csv file w/ gene names in 1st col, normalised read counts of each sample in remaining cols:
+cut -f2- new.csv > new_final.csv
+
+  # remove last 5 rows (numbers of unmapped reads)
+head -n -5 new_final.csv > new_final.csv
