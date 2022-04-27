@@ -1,0 +1,9 @@
+  # generate exon and splice site file on gtf file
+python3 hisat2_extract_exons.py Homo_sapiens.GRCh37.75.gtf > exons.csv
+python3 hisat2_extract_splice_sites.p Homo_sapiens.GRCh37.75. > splice_site.csv
+
+  # generate index
+/scratch/spectre/b/bc234/HISAT2/hisat2-2.2.1/./hisat2-build \# hisat2-build cmd for generating index
+--ss /scratch/spectre/b/bc234/HISAT2/hisat2-2.2.1/cpHomo_sapiens.GRCh37.75.ss
+--exon /scratch/spectre/b/bc234/HISAT2/hisat2-2.2.1/cpHomo_sapiens.GRCh37.75.exon -c \
+/scratch/spectre/b/bc234/old_STAR/hg19_ensembl/Homo_sapiens.GRCh37.75.dna.primary_assembly.fa test_ind  
