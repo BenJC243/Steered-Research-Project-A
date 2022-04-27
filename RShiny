@@ -2,7 +2,6 @@ library(shiny)
 library(shinythemes)
 library(Seurat)
 library(uwot)
-#setwd("/home/mlp24")
 
 set_1 <- readRDS("")
 
