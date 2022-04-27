@@ -4,6 +4,6 @@ python3 hisat2_extract_splice_sites.py Homo_sapiens.GRCh37.75.gtf > splice_site.
 
   # generate index
 /scratch/spectre/b/bc234/HISAT2/hisat2-2.2.1/./hisat2-build \# hisat2-build cmd for generating index
---ss /scratch/spectre/b/bc234/HISAT2/hisat2-2.2.1/cpHomo_sapiens.GRCh37.75.ss
---exon /scratch/spectre/b/bc234/HISAT2/hisat2-2.2.1/cpHomo_sapiens.GRCh37.75.exon \
+--ss /scratch/spectre/b/bc234/HISAT2/hisat2-2.2.1/splice_site.csv
+--exon /scratch/spectre/b/bc234/HISAT2/hisat2-2.2.1/exons.csv \
 /scratch/spectre/b/bc234/old_STAR/hg19_ensembl/Homo_sapiens.GRCh37.75.dna.primary_assembly.fa index_
