@@ -1,5 +1,6 @@
 # Steered-Research-Project-A
 
+Link to the website - https://bmfsab-solomon.shinyapps.io/SRP-A/?_ga=2.216594454.101771341.1651154579-973842359.1651154579
 This project is for partial fulfilment of MSc Bioinformatics at the University of Leicester. Group A consists of: Solomon, Megan, Ben, Rawan and Karthik. All work submitted here is our own.
 
 For the Seurat analysis you will have to download all the files in the 'GROUP A SUBMISSION FOLDER'r and then run the R script uploaded. To make sure the script runs smoothly you will have to change the "setwd()" command to the specific directory the files you previously downloaded. 
