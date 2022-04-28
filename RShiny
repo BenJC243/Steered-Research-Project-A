@@ -1,10 +1,11 @@
 library(shiny)
+install.packages(factoextra)
 library(shinythemes)
 library(Seurat)
 library(SeuratObject)
 library(uwot)
 library(factoextra)
-setwd('/home/solomon/Research_project/saverds')
+#setwd('/home/solomon/Research_project/saverds')
 
 set_1 <- readRDS('pipeline1.rds')
 
@@ -41,9 +42,9 @@ ui <- fluidPage(theme = shinytheme('slate'),
                                               method may have merged two clusters that were of questionable definition in the original publication.'),
                                       br(),
                                       plotOutput('darmanis_cluster', width = '100%') 
-                                      )),
+                                    )),
                            
-
+                           
                            tabPanel('Alternative Analysis - Pipeline 2 ',
                                     tags$h1('Seurat stuff'),
                                     sidebarPanel('Gene Selection',
@@ -60,52 +61,56 @@ ui <- fluidPage(theme = shinytheme('slate'),
                                                                          'EEF1A1' = 'Promotes GTP-dependent binding of aminoacyl-tRNA to ribsosomes. Also plays a role in regulaiton of IFNG transcription. ', 'ACSBG1' = 'Ligase that catalyses the converstion of fatty acids into acyl-CoAs. Present in all regions of the brain excluding the pituitary gland', 
                                                                          'SLC39A12' = 'Zinc influx transporter protein expressed in the brain', 'AGXT2L1' = 'Enzyme that catalyses the pyridoxal-phosphate-dependent brakdown of phosphoethanolamine', 'GJB6' = 'Encodes for a gap junction.',
                                                                          'PRODH' = 'Causes the conversion of proline to delta-1-pyrroline-5-carboxylate.', 'MAG' = 'This is gene MAG', 'KLK6' = 'This is gene KLK6', '9JB1' = 'This is gene 9JB1', 'CNDP1' = 'This is gene CNDP1', 'CARN1' = 'This is gene CARN1',
-                                                                        'PRODH' = 'Causes the conversion of proline to delta-1-pyrroline-5-carboxylate.', 'MAG' = 'Mediates interaction between myleinating cells and neurons by binding to neuronal sialic acid-containing gangliosides. Plays a role in axon myelinaiton maintenance.', 
+                                                                         'PRODH' = 'Causes the conversion of proline to delta-1-pyrroline-5-carboxylate.', 'MAG' = 'Mediates interaction between myleinating cells and neurons by binding to neuronal sialic acid-containing gangliosides. Plays a role in axon myelinaiton maintenance.', 
                                                                          'KLK6' = 'Is a serine protease which shows activity against multiple proteins including: amyloid precursor protein, myelin basic protein, gelatin, casein, fibronectin, laminin, vitronectin and collagen. It is also thought to play a potential role in axon outgrowth after spinal cord injury.', 
-                                                                          'CNDP1' = 'Enzyme which catalyses peptide bond hydrolysis in Xaa-His dipeptides. Found in the adult central nervous system.', 'CARNS1' = 'Enzymes that catalyses the synthesis of carnosine and homocarnosine.' , 'VSTM2A' = 'Plays a role in the regulation of the early stage of white and brown preadipocyte cell differentiation.', 'NLGN4Y' = ' Neuronal cell surface protein invovled in cell-cell interactions', 
-                                                             'DLX6' = ' Has roles including DNA-binding transcription factor activity, and sequence specific DNA binding. DLX6 is expressed at day 9 of embryonic development, with expression on day 12.5 being in the brain and bones. From this, expression levels decline from day 15. Primarily ecpressed in the forebrain.'),
+                                                                         'CNDP1' = 'Enzyme which catalyses peptide bond hydrolysis in Xaa-His dipeptides. Found in the adult central nervous system.', 'CARNS1' = 'Enzymes that catalyses the synthesis of carnosine and homocarnosine.' , 'VSTM2A' = 'Plays a role in the regulation of the early stage of white and brown preadipocyte cell differentiation.', 'NLGN4Y' = ' Neuronal cell surface protein invovled in cell-cell interactions', 
+                                                                         'DLX6' = ' Has roles including DNA-binding transcription factor activity, and sequence specific DNA binding. DLX6 is expressed at day 9 of embryonic development, with expression on day 12.5 being in the brain and bones. From this, expression levels decline from day 15. Primarily ecpressed in the forebrain.'),
                                                              selected = '', multiple = FALSE),
                                                  radioButtons('dataset', label = ('Pipeline 2 - Seurat'),
-                                                                choices = list('sample1' = 'set_1'),
-                                                                selected = 'set_1'),
-                                                   #helpText('Enter gene names in CAPS.  Gene names must be exact.'),
-                                                   #textInput('gene2', label = 'Gene Name', value = ""),
-                                                   selectInput('gene2', 'Select top 5 expressed genes in each cluster',
-                                                               choices = c('CD24', 'TMSB15A', 'SOX11','DCX' , 'S100A11', 'SRGN',  'BZM', 'CD74',    'GABRA1' , 'GABRG2' , 'SNAP25', 'TMEM130' ,  'SYNPR' , 'CKMT1B' ,  'MEG3', 'UNC80' ,   'AHI1',    'EEF1A1'  , 'ACSBG1',      'SLC39A12' , 'AGXT2L1' , 'GJB6' ,       
-                                                                           'PRODH', 'MAG' , '9JB1' , 'CNDP1' , 'CARN1', 'PRODH' ,'MAG' ,'KLK6',  'CNDP1', 'CARNS1' , 'VSTM2A', 'NLGN4Y','DLX6')
-                                                               ),
-                                                 
-                                                   column(8,
-                                                          column(6,
-                                                                 mainPanel(
-                                                                   #h1("First level title", align = "center"),
-                                                                   br(),
-                                                                   textOutput('dropdown'), #tableOutput('tabledata'),
-                                                                   textOutput('firstgene'),
-                                                                   plotOutput('dimPlot1', width = '1500%'),
-                                                                   br(),
-                                                                   br(),
-                                                                   br(),
-                                                                   br(),
-                                                                   plotOutput('genePlot2', width = '1500%'),
-                                                                   #plotOutput('dimPlot3', width =  '2000%'),
-                                                                           )
-                                                                 )
-                                                          )
-                                                   )
+                                                              choices = list('sample1' = 'set_1'),
+                                                              selected = 'set_1'),
+                                                 #helpText('Enter gene names in CAPS.  Gene names must be exact.'),
+                                                 #textInput('gene2', label = 'Gene Name', value = ""),
+                                                 selectInput('gene2', 'Select top 5 expressed genes in each cluster',
+                                                             choices = c('CD24', 'TMSB15A', 'SOX11','DCX' , 'S100A11', 'SRGN',  'BZM', 'CD74',    'GABRA1' , 'GABRG2' , 'SNAP25', 'TMEM130' ,  'SYNPR' , 'CKMT1B' ,  'MEG3', 'UNC80' ,   'AHI1',    'EEF1A1'  , 'ACSBG1',      'SLC39A12' , 'AGXT2L1' , 'GJB6' ,       
+                                                                         'PRODH', 'MAG' , '9JB1' , 'CNDP1' , 'CARN1', 'PRODH' ,'MAG' ,'KLK6',  'CNDP1', 'CARNS1' , 'VSTM2A', 'NLGN4Y','DLX6')
                                                  ),
-                                    
+                                                 
+                                                 column(8,
+                                                        column(6,
+                                                               mainPanel(
+                                                                 #h1("First level title", align = "center"),
+                                                                 br(),
+                                                                 textOutput('dropdown'), #tableOutput('tabledata'),
+                                                                 textOutput('firstgene'),
+                                                                 plotOutput('dimPlot1', width = '1500%'),
+                                                                 br(),
+                                                                 tags$h4('We observed a total of 7 clusters seen here, commpared to 10 identified by Darmanis et al (2015).'),
+                                                                 br(),
+                                                                 br(),
+                                                                 br(),
+                                                                 plotOutput('genePlot2', width = '1500%'),
+                                                                 #plotOutput('dimPlot3', width =  '2000%'),
+                                                                 br(),
+                                                                 tags$h4('This graph allows for the selection of individual genes within the cluster. The genes we idnetified can be found in the corresponding report.'),
+                                                                 br(),
+                                                               )
+                                                        )
+                                                 )
+                                    )
+                           ),
+                           
                            tabPanel("References",
                                     div(includeMarkdown("references.md"))
-                                    )
                            )
+                )
 )
 
-                
-                           
 
-                
-                
+
+
+
+
 
 
 server <- function(input, output, session) {
@@ -113,8 +118,8 @@ server <- function(input, output, session) {
   output$firstgene <- renderText(input$var)
   output$dropdown <- renderText(input$barCD24)
   #output$expression_text <- renderText(input = "subset of features that exhibit high cell-to-cell variation in the dataset (i.e, they are highly 
-                                                 #expressed in some cells, and lowly expressed in others'")
- 
+  #expressed in some cells, and lowly expressed in others'")
+  
   output$txtout <- renderText({
     paste( input$txt1, input$txt2, sep = ' ' )
   })
@@ -131,7 +136,7 @@ server <- function(input, output, session) {
   output$darmanis_cluster <- renderPlot({
     plot(fit, what= 'classification')  
   })
- 
+  
   output$BIC <- renderPlot({
     plot(fit, what= 'BIC')
   })
