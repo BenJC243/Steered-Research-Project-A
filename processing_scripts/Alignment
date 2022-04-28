@@ -6,27 +6,13 @@ http://ftp.ensembl.org/pub/release-75/fasta/homo_sapiens/dna/ # Reference genome
 
 https://www.gencodegenes.org/human/release_19.html #Annotation file --> 'Comprehensive gene annotation'
 
-# GENERATE GENOME INDEX
-#!/bin/bash
-#PBS -l nodes=2:ppn=4
-#PBS -l walltime=10:00:00
-#PBS -l vmem=140gb
-#PBS -m bea
-#PBS -M bc234@student.le.ac.uk
-
+# GENERATE GENOME INDEX: submitted to cluster via qsub cmd
 /scratch/spectre/b/bc234/STAR/STAR-2.7.10a/source/./STAR --runMode genomeGenerate \
 --runThreadN 16 --genomeDir /scratch/spectre/b/bc234/STAR/STAR-2.7.10a/source/genome_index \# directory of genome index output
 --genomeFastaFiles /scratch/spectre/b/bc234/old_STAR/hg19_ensembl/Homo_sapiens.GRCh37.75.dna.primary_assembly.fa \
 --sjdbGTFfile /scratch/spectre/b/bc234/old_STAR/hg19_gtf/Homo_sapiens.GRCh37.75.gtf --sjdbOverhang 74 --genomeChrBinNbits 12 #genome annotation file
 
-  # ALIGNMENT --> SAM files for each pair of fastq files (each pair of reads)
-#!/bin/bash
-#PBS -l nodes=2:ppn=4
-#PBS -l walltime=24:00:00
-#PBS -l vmem=140gb
-#PBS -m bea
-#PBS -M bc234@student.le.ac.uk
-
+  # ALIGNMENT --> SAM files for each pair of fastq files (each pair of reads): submitted to cluster via qsub cmd
 for SRR1 in /scratch/spectre/b/bc234/sra/*_1.fastq; do #directory of _1.fastq files
 for SRR2 in /scratch/spectre/b/bc234/sra/fastq2/*_2.fastq; do #directory of _2.fastq files
 for i in $(cat /scratch/spectre/b/bc234/SRR_Acc_List.txt); do # SRR numbers in text file
