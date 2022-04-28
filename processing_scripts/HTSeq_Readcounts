@@ -1,5 +1,5 @@
-HTSeq: Requires Anaconda installation
-conda install htseq
+HTSeq: Requires python3 and Anaconda
+conda install htseq #install HTSeq
 
 # Count matrix v2 --> generate one count matrix per SAM file:
 for i in /scratch/spectre/b/bc234/STAR/STAR-2.7.10a/SAMS/*.sam; do
