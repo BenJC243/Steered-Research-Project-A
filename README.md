@@ -15,3 +15,4 @@ Ensure that these packages are installed before running the seurat analysis scri
 FINAL_LOGNORM.csv.gz normalised using same method as Dermanis: "The counts of all genes for any given cell where converted to counts per million (CPM) by diving with the total number of reads and multiplying by 106 followed by conversion to a log base 10" --> see suppl Dermanis file. The counts were however
 divided by the count total (column sum) of their respective sample.
 FINAL_notLOG: same as above, but wasn't converted to log base 10
+Count_matv2: Raw read counts
