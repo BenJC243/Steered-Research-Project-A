@@ -15,11 +15,10 @@ Our reanalysis of the Darmanis et (2015) data leads to the identification of a s
 <img src="scRNA-overview.jpg" alt="scRNA Overview" width="400"/>
 
 #### scRNAseq Overview
-
-Test text
+scRNAseq refers to sequencing on RNA at a single cell level. Implementing scRNAseq on transcriptomic data allows for advancements in our understanding of protein location, movement and interactions. As described in this figure, tissue is taken, then cells from this tissue are isolates and sequenced. Gene expression levels are then compared cell to cell, rather than via traditional methods of overall expression levels. This allows us to quantify where/what is expressing the protein and draw biological conclusions from that (Olsen and Baryawno, 2018). 
 </center>
 
 #### Members of the Group
 
-**Main Contributors** :  Solomon, Megan, Ben , Karthik, Rawan 
+**Contributors** :  Solomon, Megan, Ben , Karthik, Rawan 
 
