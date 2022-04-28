@@ -72,8 +72,8 @@ ui <- fluidPage(theme = shinytheme('slate'),
                                                  #helpText('Enter gene names in CAPS.  Gene names must be exact.'),
                                                  #textInput('gene2', label = 'Gene Name', value = ""),
                                                  selectInput('gene2', 'Select top 5 expressed genes in each cluster',
-                                                             choices = c('CD24', 'TMSB15A', 'SOX11','DCX' , 'S100A11', 'SRGN',  'BZM', 'CD74',    'GABRA1' , 'GABRG2' , 'SNAP25', 'TMEM130' ,  'SYNPR' , 'CKMT1B' ,  'MEG3', 'UNC80' ,   'AHI1',    'EEF1A1'  , 'ACSBG1',      'SLC39A12' , 'AGXT2L1' , 'GJB6' ,       
-                                                                         'PRODH', 'MAG' , '9JB1' , 'CNDP1' , 'CARN1', 'PRODH' ,'MAG' ,'KLK6',  'CNDP1', 'CARNS1' , 'VSTM2A', 'NLGN4Y','DLX6')
+                                                             choices = c('CD24', 'TMSB15A', 'SOX11','DCX' , 'S100A11', 'SRGN', 'CD74',    'GABRA1' , 'GABRG2' , 'SNAP25', 'TMEM130' ,  'SYNPR' , 'CKMT1B' ,  'MEG3', 'UNC80' ,   'AHI1',    'EEF1A1'  , 'ACSBG1',      'SLC39A12' , 'AGXT2L1' , 'GJB6' ,       
+                                                                         'PRODH', 'MAG' , 'CNDP1', 'PRODH' ,'MAG' ,'KLK6',  'CNDP1', 'CARNS1' , 'VSTM2A', 'NLGN4Y','DLX6')
                                                  ),
                                                  
                                                  column(8,
