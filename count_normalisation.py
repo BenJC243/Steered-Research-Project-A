@@ -2,7 +2,7 @@ import os
 import math
 
 # iterate over files in dir containing count matrices
-dir = '/home/bc234/test_dir'
+dir = '/home/bc234/csvs'
 count = 0
 for file in os.listdir(dir):
     if file.endswith('.csv'):
@@ -19,7 +19,7 @@ for file in os.listdir(dir):
             return sum
         
         # make new file of counts normalised (CPM)
-        c = open('/home/bc234/test_dir/file_' + str(count) + 'NORM.txt', 'w')
+        c = open('/home/bc234/csvs/file_' + str(count) + 'NORM.txt', 'w')
         for i in rl:
             if i == '0':
               continue
